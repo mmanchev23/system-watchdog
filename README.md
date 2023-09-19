@@ -1,48 +1,47 @@
-# System Watch Dog
+# System Watchdog - Local Deployment Guide
 
-## Local Deployment Guide
+Welcome to the System Watchdog Local Deployment Guide. This guide will walk you through the setup process for running System Watchdog on your local machine.
 
-Follow these steps to set up and run the Monitoring REST API locally.
+## Prerequisites
 
-### Prerequisites
-
-Before proceeding, make sure you have the following:
+Before you get started, ensure that you have the following prerequisites installed:
 
 - Docker
 - Docker Compose
-- `.env` file with the necessary configuration values (see below)
+- A `.env` file with the necessary configuration values (see below)
 
-### Configuration
+## Configuration
 
-Create a `.env` file in the project root with the following content, replacing the placeholders with your actual credentials:
+1. **Create `.env` File:** Begin by creating a `.env` file in the project's root directory. This file will contain important configuration details. Replace the placeholders with your actual credentials.
 
-```plaintext
-MYSQL_HOST=db
-DATABASE_PORT=3306
-MYSQL_DATABASE=metrics
-MYSQL_HOSTNAME=localhost
+   ```plaintext
+   MYSQL_HOST=db
+   DATABASE_PORT=3306
+   MYSQL_DATABASE=metrics
+   MYSQL_HOSTNAME=localhost
 
-MYSQL_USER=<your-mysql-user>
-MYSQL_PASSWORD=<your-mysql-password>
-MYSQL_ROOT_PASSWORD=<your-mysql-root-password>
-```
+   MYSQL_USER=<your-mysql-user>
+   MYSQL_PASSWORD=<your-mysql-password>
+   MYSQL_ROOT_PASSWORD=<your-mysql-root-password>
+   ```
 
-### Running the Application
+## Running the Application
 
-Execute the following command to launch the application using the preconfigured script:
+To launch the System Watchdog application, execute the following command in your terminal:
 
 ```bash
 ./start.sh
 ```
 
-### Populating the Database
+## Populating the Database
 
-To populate the database with data, you have two options:
+You have two methods to populate the database with data:
 
-1. Run the `data.py` script located in the `server` directory.
-2. Use the dedicated UI button, highlighted with a yellow color and featuring a database icon, situated on every host detail page, for seamless data population.
+1. **Using the Script:** Navigate to the `server` directory and run the `data.py` script.
 
-### Accessing the Applications
+2. **Using the UI:** On every host detail page, you'll find a dedicated UI button highlighted in yellow, featuring a database icon. Click this button to seamlessly populate the database with data.
+
+## Accessing the Applications
 
 Once the application is up and running, you can access the following components through your web browser:
 
@@ -50,18 +49,20 @@ Once the application is up and running, you can access the following components 
 - **Server Application:** [http://localhost:8000/](http://0.0.0.0:8000/)
 - **Database Application:** [http://localhost:8080/](http://localhost:8080/)
 
-### Troubleshooting
+## Troubleshooting
 
-If you encounter any issues with the services, you can attempt to resolve them by rerunning the preconfigured script:
+Encountering issues with the services? Here's how to resolve them:
 
-```bash
-./start.sh
-```
+- Try rerunning the preconfigured script:
 
-For persistent issues, particularly those related to the database service, consider updating the connection string in the `database.py` file located in the `server/api` directory:
+  ```bash
+  ./start.sh
+  ```
 
-```python
-MYSQL_URL = f"mysql+mysqlconnector://{settings.MYSQL_USER}:{settings.MYSQL_PASSWORD}@db:{settings.DATABASE_PORT}/{settings.MYSQL_DATABASE}"
-```
+- For persistent issues, especially those related to the database service, consider updating the connection string in the `database.py` file located in the `server/api` directory. Find the following code snippet:
 
-Maintain this configuration to ensure optimal functionality of the Monitoring REST API.
+  ```python
+  MYSQL_URL = f"mysql+mysqlconnector://{settings.MYSQL_USER}:{settings.MYSQL_PASSWORD}@db:{settings.DATABASE_PORT}/{settings.MYSQL_DATABASE}"
+  ```
+
+  Maintain this configuration to ensure optimal functionality of the Monitoring REST API.
